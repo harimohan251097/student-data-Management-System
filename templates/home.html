@@ -1,0 +1,158 @@
+<html>
+
+<head>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossclass="anonymous">
+
+    <style>
+        .mainContainer{
+            padding : 50px;
+
+        }
+        .title{
+            padding: 20px;
+            color: white;
+            background-color: black;
+        }
+        .create-form-div{
+        }
+        .submit{
+            width: 77% !important;
+            margin-top: 15px;
+            margin-left: 15px;
+            margin-bottom: 15px;
+            background-color: white !important;
+            color: black;
+            border: 1px solid black;
+        }
+        .submit:hover{
+            background-color: black !important;
+            color: white !important;
+        }
+        .delete-btn{
+            border: none;
+            box-shadow: none;
+            background-color: white;
+            color: black;
+            font-weight: bold;
+            text-decoration: underline black;
+        }
+        .select{
+            width: 78% !important;
+            margin-left: 15px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark" >
+        <div class="container-fluid" >
+          <h1><span class="navbar-brand mb-0 h1" style="font-size: 60px;">Student   Management   System</span></h1>
+        </div>
+      </nav>
+
+    <div class="container mainContainer">
+        <div class="row">
+
+            <div class="col-sm " >
+                
+                <div class="create-form-div shadow">
+                    <h2 class="title">Add Student Data</h2>
+                    <form method="POST">
+                        <div class="form-group-row">
+
+                            <label for="name" class="col-sm-2 col-form-label">Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="name" name="name">
+                            </div>
+
+                            <label for="class" class="col-sm-2 col-form-label">Class</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="class" name="class">
+                            </div>
+
+                            <label for="branch" class="col-sm-2 col-form-label">Branch</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="branch" name="branch">
+                            </div>
+
+                            <button type="submit" class="btn btn-dark col-sm-10 submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="create-form-div shadow">
+                        <h2 class="title">Update Student info</h2>
+                        <form method="POST" action="/update">
+                            <div class="form-group-row">
+
+                                <label for="fooditem" class="col-sm-10 col-form-label">Select student</label>
+                                <select class="form-control col-sm-10 select" name="id">
+                                    {{range .}}
+                                    <option value={{.ID}}>{{.Name}}</option>
+                                    {{end}}
+                                </select>
+                                <br>
+                                <br>
+                                <label for="name" class="col-sm-2 col-form-label">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="name" name="name">
+                                </div>
+    
+                                <label for="class" class="col-sm-2 col-form-label">Class</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="class" name="class">
+                                </div>
+    
+                                <label for="branch" class="col-sm-2 col-form-label">Branch</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="branch" name="branch">
+                                </div>
+    
+                                <button type="submit" class="btn btn-dark col-sm-10 submit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+            </div>
+            <div class="col-sm">
+                <div class="card shadow">
+                    <h3 class="title">total students</h3>
+                    <div>
+                    <table class="table">
+                            <thead>
+                                <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Class</th>
+                                <th scope="col">Branch</th>
+                                <th scope="col">Delete</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {{range .}}
+                                <tr>
+                                    <th scope="row">{{.ID}}</th>
+                                    <th>{{.Name}}</th>
+                                    <th>{{.Class}}</th>
+                                    <th>{{.Branch}}</th>
+                                    <th>
+                                    <form method="POST" action="/delete">
+                                        <input type="hidden" id="delete" name="id" value={{.ID}} />
+                                        <button type="submit" class="delete-btn">Delete</button>
+                                    </form>
+                                    </th>
+                                </tr>
+                                {{end}}
+                            </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
